@@ -1,0 +1,13 @@
+<ivy-module version="2.0">
+	<info organisation="mincom" module="EllipseSanityCheck"/>
+	
+	<configurations>
+		<conf name="default"/>
+	</configurations>
+	
+	<publications />
+	
+	<dependencies>
+		<dependency org="mincom" name="ellipse-rc" rev="${infrastructure.version}" conf="default"/>
+	</dependencies>
+</ivy-module>
