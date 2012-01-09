@@ -32,22 +32,27 @@ public class MincomFitniumFixture extends FitniumFixture {
 	
 	private boolean sso;
 	
-	private HttpCommandProcessor commandProcessor;
-	
 	private MFUI mfui;
 	
 	private MFUIV2 mfuiv2;
 	
-	private Properties properties = new Properties();
-	
 	private String testLocale = null;
+	
+	private HttpCommandProcessor commandProcessor;
+	
+	private Properties properties = new Properties();
 	
 	public MincomFitniumFixture() {
 		super();
 	}
 	
+	/* methods to initialise ellipse testing */
 	public void ellipseUser(String user) {
 		properties.put(TEST_USERNAME, user);
+	}
+	
+	public void ellipsePassword(String password) {
+		properties.put(TEST_PASSWORD, password);
 	}
 	
 	public void ellipseDistrict(String district) {
@@ -58,32 +63,32 @@ public class MincomFitniumFixture extends FitniumFixture {
 		properties.put(TEST_POSITION, position);
 	}
 	
-	// TODO change from void
+	public void ellipseTestBrowser(String browser) {
+		properties.put(TEST_BROWSER, browser);
+	}
+	
+	public void ellipseTestPort(String port) {
+		properties.put(TEST_SELENIUM_PORT, port);
+	}
+	
 	public void initialiseEllipse(String url) {
-//		, String user, String district,
-//			String position) {
-//		properties.putAll(System.getProperties());
+		checkAndSetProperties();
 		
-		// TODO a way to overwrite defaults
-		properties.put(TEST_BROWSER, DEFAULT_BROWSER);
-		properties.put(TEST_SELENIUM_PORT, DEFAULT_PORT);
-		properties.put(TEST_PASSWORD, DEFAULT_PASSWORD);
-		
-		// TODO bad
 		properties.put(TEST_SERVER_URL, "http://"+url);
-//		properties.put(TEST_USERNAME, user);
-//		properties.put(TEST_DISTRICT, district);
-//		properties.put(TEST_POSITION, position);
 		
 		sso = "true".equals(getProperty(TEST_SERVER_SSO));
+		
 		String browser = getProperty(TEST_BROWSER);
-		if(browser == null || browser.startsWith("${"))
-			browser = "*firefox";
-		String[] credentials = new String[] { getProperty("test.username"),
-					getProperty("test.password"),
-					getProperty("test.district"),
-					getProperty("test.position"), };
+		
+		String[] credentials = new String[] {
+				getProperty(TEST_USERNAME),
+				getProperty(TEST_PASSWORD),
+				getProperty(TEST_DISTRICT),
+				getProperty(TEST_POSITION),
+				};
+		
 		int seleniumPort = Integer.parseInt(getProperty(TEST_SELENIUM_PORT));
+		
 		testLocale = getProperty(TEST_LOCALE);
 		if(testLocale != null && (testLocale.startsWith("${") || testLocale.length() == 0))
 			testLocale = null;
@@ -109,8 +114,8 @@ public class MincomFitniumFixture extends FitniumFixture {
 		
 		open(!false, getURL(null));
 	}
+	/* end initialisation methods */
 	
-	// TODO change void
 	public void loadApplication(String app) {
 		mfuiv2.loadApp(app);
 	}
@@ -192,5 +197,14 @@ public class MincomFitniumFixture extends FitniumFixture {
 		} catch (Exception e) {
 		}
 	}
-
+	
+	private void checkAndSetProperties() {
+		if (!properties.containsKey(TEST_BROWSER))
+			properties.put(TEST_BROWSER, DEFAULT_BROWSER);
+		if (!properties.containsKey(TEST_SELENIUM_PORT))
+			properties.put(TEST_SELENIUM_PORT, DEFAULT_PORT);
+		if (!properties.containsKey(TEST_PASSWORD))
+			properties.put(TEST_PASSWORD, DEFAULT_PASSWORD);
+	}
+	
 }
