@@ -32,9 +32,9 @@ public class BaseMincomFitniumFixture extends FitniumFixture {
 	
 	private boolean sso;
 	
-	private MFUI mfui;
+	protected MFUI mfui;
 	
-	private MFUIV2 mfuiv2;
+	protected MFUIV2 mfuiv2;
 	
 	private String testLocale = null;
 	
