@@ -14,6 +14,11 @@ public class MincomFitniumFixture extends FitniumFixture {
 	
 	public static final String INDEX = "ui.jsp";
 	
+	/* Default properties */
+	public static final String DEFAULT_BROWSER = "*firefox";
+	public static final String DEFAULT_PORT = "4444";
+	public static final String DEFAULT_PASSWORD = "";
+	
 	/* JVM Custom properties */
 	public static final String TEST_SERVER_URL = "test.server.url";
 	public static final String TEST_SERVER_SSO = "test.server.sso";
@@ -41,31 +46,34 @@ public class MincomFitniumFixture extends FitniumFixture {
 		super();
 	}
 	
+	public void ellipseUser(String user) {
+		properties.put(TEST_USERNAME, user);
+	}
+	
+	public void ellipseDistrict(String district) {
+		properties.put(TEST_DISTRICT, district);
+	}
+	
+	public void ellipsePosition(String position) {
+		properties.put(TEST_POSITION, position);
+	}
+	
 	// TODO change from void
-	public void initialiseEllipse() {
-//		try {
-//			// load default properties
-//			properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource("test.properties", AntRunner.class));
-//		} catch (Exception e) {
-//			throw new RuntimeException("Unable to load default test.properties");
-//		}
+	public void initialiseEllipse(String url) {
+//		, String user, String district,
+//			String position) {
+//		properties.putAll(System.getProperties());
 		
-//		try {
-//			// override with any local test.properties
-//			PropertiesLoaderUtils.fillProperties(properties, new FileSystemResource("test.properties"));
-//		} catch (Exception e) {
-//			// Ignore
-//		}
+		// TODO a way to overwrite defaults
+		properties.put(TEST_BROWSER, DEFAULT_BROWSER);
+		properties.put(TEST_SELENIUM_PORT, DEFAULT_PORT);
+		properties.put(TEST_PASSWORD, DEFAULT_PASSWORD);
 		
-		properties.putAll(System.getProperties());
-		// TODO HAX
-		properties.put(TEST_BROWSER, "*firefox");
-		properties.put(TEST_SELENIUM_PORT, "4444");
-		properties.put(TEST_SERVER_URL, "http://msdvml49/ria/");
-		properties.put(TEST_USERNAME, "ks6084");
-		properties.put(TEST_PASSWORD, "");
-		properties.put(TEST_DISTRICT, "R100");
-		properties.put(TEST_POSITION, "SYSAD");
+		// TODO bad
+		properties.put(TEST_SERVER_URL, "http://"+url);
+//		properties.put(TEST_USERNAME, user);
+//		properties.put(TEST_DISTRICT, district);
+//		properties.put(TEST_POSITION, position);
 		
 		sso = "true".equals(getProperty(TEST_SERVER_SSO));
 		String browser = getProperty(TEST_BROWSER);
@@ -117,6 +125,7 @@ public class MincomFitniumFixture extends FitniumFixture {
 		String tf = getProperty("test.timeout.factor");
 		try {
 			if (tf != null) {
+				// TODO this is part of JI 3.6+
 				// Use explicit, fully qualified name, so its 'obvious' what's going on.
 //				com.mincom.ellipse.rc.selenium.Wait.setTimeoutFactor(Float.parseFloat(tf));
 			}
