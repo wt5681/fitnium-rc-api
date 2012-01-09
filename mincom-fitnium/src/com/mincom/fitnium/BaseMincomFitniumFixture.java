@@ -10,7 +10,7 @@ import com.mincom.ellipse.rc.apiv2.MFUIV2;
 import com.mincom.ellipse.rc.selenium.MFUISelenium;
 import com.thoughtworks.selenium.HttpCommandProcessor;
 
-public class MincomFitniumFixture extends FitniumFixture {
+public class BaseMincomFitniumFixture extends FitniumFixture {
 	
 	public static final String INDEX = "ui.jsp";
 	
@@ -42,7 +42,7 @@ public class MincomFitniumFixture extends FitniumFixture {
 	
 	private Properties properties = new Properties();
 	
-	public MincomFitniumFixture() {
+	public BaseMincomFitniumFixture() {
 		super();
 	}
 	
@@ -115,11 +115,6 @@ public class MincomFitniumFixture extends FitniumFixture {
 		open(!false, getURL(null));
 	}
 	/* end initialisation methods */
-	
-	public void loadApplication(String app) {
-		mfuiv2.loadApp(app);
-	}
-	
 	
 	// Private helper methods
 	private String getProperty(String key) {
