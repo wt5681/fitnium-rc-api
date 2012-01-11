@@ -201,5 +201,10 @@ public class BaseMincomFitniumFixture extends FitniumFixture {
 		if (!properties.containsKey(TEST_PASSWORD))
 			properties.put(TEST_PASSWORD, DEFAULT_PASSWORD);
 	}
-	
+	public void closeBrowser() {
+		if (sso) {
+			mfui.logout();
+		}
+		commandProcessor.stop();
+	}
 }
