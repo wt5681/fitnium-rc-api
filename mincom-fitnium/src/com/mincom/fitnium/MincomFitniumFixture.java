@@ -1,6 +1,5 @@
 package com.mincom.fitnium;
 
-import com.magneticreason.fitnium.api.FitniumVariableAPI;
 import com.mincom.ellipse.rc.apiv2.Application;
 
 public class MincomFitniumFixture extends BaseMincomFitniumFixture {
@@ -36,4 +35,14 @@ public class MincomFitniumFixture extends BaseMincomFitniumFixture {
 	public void confirmAction(String action) {
 		this.application = application.dialogButton(action);
 	}
+	
+	public boolean assertWidgetEditable(String widget) {
+		return application.getWidget(widget).isEditable();
+	}
+	
+    public void captureScreenToFile(String filename) {
+//        FitniumScreenCaptureAPI.captureScreenToFile(this, filename);
+        mfuiv2.captureScreenshot(filename);
+    }
+
 }
