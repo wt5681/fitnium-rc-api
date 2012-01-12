@@ -33,7 +33,7 @@ public class MincomFitniumFixture extends BaseMincomFitniumFixture {
 	}
 
 	public void confirmAction(String action) {
-		this.application = application.dialogButton(action);
+		this.application = application.dialogButton(action).waitForReady();
 	}
 	
 	public boolean assertWidgetEditable(String widget) {
