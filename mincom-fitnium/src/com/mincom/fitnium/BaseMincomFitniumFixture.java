@@ -10,6 +10,7 @@ import com.mincom.ellipse.rc.apiv2.MFUIV2;
 import com.mincom.ellipse.rc.selenium.MFUISelenium;
 import com.thoughtworks.selenium.HttpCommandProcessor;
 
+
 public class BaseMincomFitniumFixture extends FitniumFixture {
 	
 	public static final String INDEX = "ui.jsp";
@@ -30,6 +31,7 @@ public class BaseMincomFitniumFixture extends FitniumFixture {
 	public static final String TEST_DISTRICT = "test.district";
 	public static final String TEST_POSITION = "test.position";
 	
+
 	private boolean sso;
 	
 	protected MFUI mfui;
@@ -70,6 +72,7 @@ public class BaseMincomFitniumFixture extends FitniumFixture {
 	public void ellipseTestPort(String port) {
 		properties.put(TEST_SELENIUM_PORT, port);
 	}
+	
 	
 	public void initialiseEllipse(String url) {
 		checkAndSetProperties();
