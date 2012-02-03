@@ -1,5 +1,7 @@
 package com.mincom.fitnium;
 
+import java.util.List;
+
 import com.mincom.ellipse.rc.apiv2.Application;
 import com.mincom.ellipse.rc.apiv2.Grid;
 
@@ -28,10 +30,31 @@ public class MincomFitniumFixture extends BaseMincomFitniumFixture {
 		gridResult.doubleClick(record);
 	}
 	
+	public String getGridcellGetvalue(int row, String column) {
+		return gridResult.getGridCell(column, row).getValue();
+
+	}
+	public void gridMarkRow(int row) {
+		 gridResult.markRow(row);
+
+	}
+	
+	public void getGridcellSetvalueWith(int row, String column, String value) {
+		 gridResult.getGridCell(column, row).setValue(value);
+
+	}
+	
+	public void gridAction(String action) {
+		 gridResult.button(action);
+	}
+	
 	public void setWidgetWithValue(String id, String value) {
 		this.application = application.setWidgetValue(id, value);
 	}
 
+	public void setDialogWidgetWithValue(String id, String value) {
+		application.getDialogWidget(id).setValue(value);
+	}
 	public String getWidgetWithValue(String widgetName) {
 		return application.getWidget(widgetName).getValue();
 	}
@@ -57,6 +80,7 @@ public class MincomFitniumFixture extends BaseMincomFitniumFixture {
 		return application.getWidget(widget).isEditable();
 	}
 
+	
 	public void captureScreenToFile(String filename) {
 //        FitniumScreenCaptureAPI.captureScreenToFile(this, filename);
         mfuiv2.captureScreenshot(filename);
